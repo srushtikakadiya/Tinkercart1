@@ -1,0 +1,23 @@
+ {% comment %} {% extends 'app/base.html' %}
+{% load static %}
+
+{% if query %}
+
+<h1>Search result found</h1>
+<br>
+
+{% for i in query %}
+<h2><a href="/base.html/{{i.slug}}">{{i.title}} : {{i.snipet}}</a></h2>
+{{% endfor %}}
+
+{{% else %}}
+<h1>Nothing to show </h1>
+{{% endif %}}  {% endcomment %}
+
+{% comment %}  
+def search(request):
+    if request.method == 'GET':
+    	search= request.GET.get('search')
+        query= Product.objects.all().filter(title=search)
+    return render(request,'search.html', {'query': query})
+ 		 {% endcomment %}
